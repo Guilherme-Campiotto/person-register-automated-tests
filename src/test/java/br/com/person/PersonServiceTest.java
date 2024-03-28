@@ -25,12 +25,20 @@ public class PersonServiceTest {
         personService = new PersonService();
     }
 
+    
 
 	@Test
-    @DisplayName("When creating a person with success should return should return Person object")
+    @DisplayName("When creating a person with success should return Person object")
 	void testCreatePersonWhenSuccessShouldReturnPerson() {
         Person personSaved = personService.createPerson(person);
         Assertions.assertNotNull(personSaved, "Method createPerson should not return null.");  
+    }
+
+    @Test
+    @DisplayName("When creating a person with success should have an id")
+	void testCreatePersonWhenSuccessShouldContainIdInReturnedObject() {
+        Person personSaved = personService.createPerson(person);
+        Assertions.assertNotNull(personSaved.getId(), "Person id should not be null.");
     }
 
     @Test
@@ -71,5 +79,12 @@ public class PersonServiceTest {
         Person personSaved = personService.createPerson(person);
         Assertions.assertNotNull(personSaved.getGender(), "Gender should not be null.");
         Assertions.assertEquals(person.getGender(), personSaved.getGender(), "Gender is not the same.");
+    }
+
+    @Test
+    @DisplayName("When creating a person with a null email should throw Exception")
+	void testCreatePersonWhenEmailIsNullShouldThrowIllegalArgumentException() {
+        person.setEmail(null);
+        Assertions.assertThrows(IllegalArgumentException.class, () -> personService.createPerson(person), "An null email should throw IllegalArgumentException");
     }
 }

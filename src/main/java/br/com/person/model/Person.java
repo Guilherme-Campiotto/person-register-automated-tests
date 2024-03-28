@@ -21,8 +21,8 @@ public class Person {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.gender = gender;
         this.email = email;
+        this.gender = gender;
     }
 
     public Person(Long id, String firstName, String lastName, String address, String email, String gender) {
@@ -30,7 +30,7 @@ public class Person {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.gender = gender;
         this.email = email;
+        this.gender = gender;
     }
 }

@@ -25,8 +25,6 @@ public class PersonServiceTest {
         personService = new PersonService();
     }
 
-    
-
 	@Test
     @DisplayName("When creating a person with success should return Person object")
 	void testCreatePersonWhenSuccessShouldReturnPerson() {
@@ -84,7 +82,11 @@ public class PersonServiceTest {
     @Test
     @DisplayName("When creating a person with a null email should throw Exception")
 	void testCreatePersonWhenEmailIsNullShouldThrowIllegalArgumentException() {
+        
+        String expectedMessage = "Person email is mandatory, it can't be null or empty.";
+
         person.setEmail(null);
-        Assertions.assertThrows(IllegalArgumentException.class, () -> personService.createPerson(person), "An null email should throw IllegalArgumentException");
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> personService.createPerson(person), "An null email should throw IllegalArgumentException");
+        Assertions.assertEquals(expectedMessage, exception.getMessage(), "Exception error message is incorrect.");
     }
 }
